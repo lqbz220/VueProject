@@ -6,8 +6,7 @@ import { defineProps, ref } from 'vue';
 
 const appStore = useAppStore();
 const imageStore = useImageStore();
-
-let cur = ref(0);
+const cur = ref(0);
 defineProps({
     image: Object,
 });
@@ -16,7 +15,6 @@ const onClick = (id) => {
     cur.value = id;
     appStore.toggleModal();
 }
-
 </script>
 
 <template>

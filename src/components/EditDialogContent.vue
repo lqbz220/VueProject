@@ -7,7 +7,8 @@ const appStore = useAppStore();
 const imageStore = useImageStore();
 
 const props = defineProps({
-    image: Object
+    image: Object,
+    modal: Boolean
 });
 const newDescription = ref(props.image.description);
 const image = ref(props.image);

@@ -18,7 +18,6 @@ const toggleFullScreen = (image) => {
   overlay.value = !overlay.value;
   console.log(selectedImage, overlay);
 }
-
 </script>
 
 <template>
@@ -40,10 +39,6 @@ const toggleFullScreen = (image) => {
     </div>
   </v-card>
 </template>
+
 <style scoped>
-/* .outline{
-  background-color: #ffffff;
-  border: 1px solid rgb(4, 4, 4);
-  border-radius: 30px;
-} */
 </style>

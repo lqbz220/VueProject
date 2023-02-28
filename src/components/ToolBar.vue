@@ -3,7 +3,6 @@ import AddImage from './AddImage.vue';
 import { useAppStore } from '../stores/app-store';
 
 const appStore = useAppStore();
-
 </script>
 
 <template>
