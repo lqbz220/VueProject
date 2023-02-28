@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { useAppStore } from '../stores/app-store.js';
 
@@ -7,7 +6,6 @@ const appStore = useAppStore();
 const toggleAdmin = () => {
   appStore.switchAdmin();
 }
-
 </script>
 
 <template>

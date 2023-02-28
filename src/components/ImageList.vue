@@ -1,22 +1,18 @@
 <script setup>
 import SingleImage from './SingleImage.vue';
-
 import { useImageStore } from '../stores/imageStore.js';
+import { storeToRefs } from 'pinia';
 
 const imageStore = useImageStore();
+const { images } = storeToRefs(imageStore)
 </script>
 
 <template>
   <v-sheet class="bg-black">
     <v-row>
-      <v-col class="d-flex child-flex" cols="4">
+      <v-col v-for="(image, index) in images" :key="index" class="d-flex child-flex" cols="4">
         <v-sheet class="pa-2 ma-2">
-          <SingleImage
-          v-for="(image, index) in imageStore.images"
-          :image="image"
-          :index="index"
-          :key="image.id"
-          />
+          <SingleImage :image="image" />
         </v-sheet>
         <template v-slot:placeholder>
           <v-row class="d-flex justify-center fill-height ma-1 align-center">

@@ -4,19 +4,18 @@ import { useAppStore } from '../stores/app-store.js';
 import { useImageStore } from "../stores/imageStore";
 
 const appStore = useAppStore();
-const imageStore = useImageStore()
+const imageStore = useImageStore();
+
 const props = defineProps({
     image: Object
 });
-console.log(props, '======')
-let newDescription = ref(props.image.description);
+const newDescription = ref(props.image.description);
+const image = ref(props.image);
 
 const onSave = () => {
-    console.log(props.image.id, newDescription.value)
-    imageStore.editDescription(props.image.id, newDescription.value);
+    imageStore.editDescription(image.value.id, newDescription.value);
     appStore.toggleModal();
 }
-
 </script>
 
 <template>
