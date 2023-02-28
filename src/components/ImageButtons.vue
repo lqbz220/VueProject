@@ -16,6 +16,7 @@ const onClick = (id) => {
     cur.value = id;
     appStore.toggleModal();
 }
+
 </script>
 
 <template>

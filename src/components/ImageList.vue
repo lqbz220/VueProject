@@ -10,7 +10,7 @@ const { images } = storeToRefs(imageStore)
 <template>
   <v-sheet class="bg-black">
     <v-row>
-      <v-col v-for="(image, index) in images" :key="index" class="d-flex child-flex" cols="4">
+      <v-col v-for="image in images" :key="image.id" class="d-flex child-flex" cols="4">
         <v-sheet class="pa-2 ma-2">
           <SingleImage :image="image" />
         </v-sheet>
