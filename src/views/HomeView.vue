@@ -9,7 +9,7 @@ import ToolBar from '../components/ToolBar.vue'
     <ToolBar />
   </div>
   <div class="d-flex justify-center align-center">
-    <v-card class="bg-light-grey ma-2" width="500" height="700">
+    <v-card class="bg-grey-lighten-3 ma-2" width="500" height="950">
       <NavList />
     </v-card>
     <ImageList />

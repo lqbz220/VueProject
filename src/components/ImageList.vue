@@ -8,7 +8,7 @@ const { images } = storeToRefs(imageStore)
 </script>
 
 <template>
-  <v-sheet class="bg-black">
+  <v-sheet class="bg-grey-lighten-3">
     <v-row>
       <v-col v-for="image in images" :key="image.id" class="d-flex child-flex" cols="4">
         <v-sheet class="pa-2 ma-2">
