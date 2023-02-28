@@ -30,8 +30,8 @@ const toggleFullScreen = (image) => {
     <v-overlay v-model="overlay" v-if="selectedImage" class="align-center justify-center">
       <v-card class="d-flex align-center" elevation="1">
         <v-img :src="selectedImage ? selectedImage.imageURL : ''" contain @click="toggleFullScreen(null)" width="500"
-          cover class="bg-grey-lighten-2 mt-6 ma-6"></v-img>
-        <v-card-title class="text-h6 ma-2">{{ selectedImage.description }}</v-card-title>
+          cover class="bg-grey-lighten-2 ma-2"></v-img>
+        <v-card-title class="text-h6">{{ selectedImage.description }}</v-card-title>
       </v-card>
     </v-overlay>
     <div v-if="appStore.isAdmin">
