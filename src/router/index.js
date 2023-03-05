@@ -15,6 +15,21 @@ const router = createRouter({
       name: "about",
       component: AboutView,
     },
+    {
+      path: "/charcoal",
+      name: "charcal",
+      component: HomeView,
+    },
+    {
+      path: "/colors",
+      name: "colors",
+      component: HomeView,
+    },
+    {
+      path: "/pencils",
+      name: "pencils",
+      component: HomeView,
+    },
   ],
 });
 
