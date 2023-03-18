@@ -15,6 +15,9 @@ export const useImageStore = defineStore("imageStore", {
     ],
   }),
   actions: {
+    addImage(image){
+      this.images.push(image);
+    },
     deleteImage(id) {
       this.images = this.images.filter((image) => {
         return image.id !== id;

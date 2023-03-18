@@ -10,10 +10,10 @@ const toggleAdmin = () => {
 
 <template>
   <nav class="d-flex justify-center flex-column align-center nav-text">
-    <routerLink v-if=appStore.isAdmin @click="toggleAdmin()" to="/">Home</routerLink>
+    <routerLink v-if=appStore.isAdmin @click="toggleAdmin" to="/">Home</routerLink>
     <routerLink v-if=!appStore.isAdmin to="/about">About</routerLink>
     <div>
-      <v-btn v-if=!appStore.isAdmin @click="toggleAdmin()">Admin</v-btn>
+      <v-btn v-if=!appStore.isAdmin @click="toggleAdmin">Admin</v-btn>
     </div>
   </nav>
 </template>

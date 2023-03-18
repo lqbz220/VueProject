@@ -16,7 +16,6 @@ let overlay = ref(false);
 const toggleFullScreen = (image) => {
   selectedImage.value = image;
   overlay.value = !overlay.value;
-  console.log(selectedImage, overlay);
 }
 </script>
 
