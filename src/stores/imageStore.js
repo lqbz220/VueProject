@@ -1,24 +1,35 @@
 import { defineStore } from "pinia";
+import axios from 'axios';
 
 export const useImageStore = defineStore("imageStore", {
   state: () => ({
-    images: [
-      { id: 1, imageURL: "https://picsum.photos/200", description: "A good image" },
-      { id: 2, imageURL: "https://picsum.photos/201", description: "Beautify picture" },
-      { id: 3, imageURL: "https://picsum.photos/202", description: "A great image" },
-      { id: 4, imageURL: "https://picsum.photos/203", description: "How pretty" },
-      { id: 5, imageURL: "https://picsum.photos/204", description: "Summer time" },
-      { id: 6, imageURL: "https://picsum.photos/205", description: "An empty space" },
-      { id: 7, imageURL: "https://picsum.photos/206", description: "A good image" },
-      { id: 8, imageURL: "https://picsum.photos/207", description: "Winter snow" },
-      { id: 9, imageURL: "https://picsum.photos/208", description: "The city" },
-    ],
+    images: [],
   }),
   actions: {
-    deleteImage(id) {
-      this.images = this.images.filter((image) => {
-        return image.id !== id;
-      });
+    async getImages() {
+      try {
+        // this.images = [];
+        // console.log(this.images, 'this.images')
+        const { data: images } = await axios.get('/api/arts')
+        console.log(images, this.images, '=======');
+        this.images = images;
+        // for(const image of images){
+        //   this.images.push(image);
+        // }
+      } catch(err){
+        console.log(err);
+      }
+    },
+    async deleteImage(id) {
+      try {
+        await axios.delete(`api/arts/${id}`);
+
+        this.images = this.images.filter((image) => {
+          return image.id !== id;
+        });
+      } catch(err) {
+        console.log(err);
+      }
     },
     editDescription(id, text) {
       this.images = this.images.map((image) => {

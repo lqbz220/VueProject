@@ -4,7 +4,8 @@ import { useImageStore } from '../stores/imageStore.js';
 import { storeToRefs } from 'pinia';
 
 const imageStore = useImageStore();
-const { images } = storeToRefs(imageStore)
+const { images } = storeToRefs(imageStore);
+console.log(images);
 </script>
 
 <template>
