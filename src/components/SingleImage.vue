@@ -22,14 +22,14 @@ const toggleFullScreen = (image) => {
 
 <template>
   <v-card>
-    <v-img :src="image.imageURL" cover class="bg-grey-lighten-2 mt-6" :width="200"
+    <v-img :src="image.imageurl" cover class="bg-grey-lighten-2 mt-6" :width="200"
       @click="toggleFullScreen(image)"></v-img>
     <v-card-title v-if="!appStore.isAdmin" class="text-h6">
       {{ image.description }}
     </v-card-title>
     <v-overlay v-model="overlay" v-if="selectedImage" class="align-center justify-center">
       <v-card class="d-flex align-center" elevation="1">
-        <v-img :src="selectedImage ? selectedImage.imageURL : ''" contain @click="toggleFullScreen(null)" width="500"
+        <v-img :src="selectedImage ? selectedImage.imageurl : ''" contain @click="toggleFullScreen(null)" width="500"
           cover class="bg-grey-lighten-2 ma-2"></v-img>
         <v-card-title class="text-h6">{{ selectedImage.description }}</v-card-title>
       </v-card>

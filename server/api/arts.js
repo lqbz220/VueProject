@@ -17,24 +17,25 @@ router.get('/', async (req, res) => {
     }
   })
 
-  // GET an image
-  router.get('/arts/:id', async (req, res) => {
+  // Add an image
+  router.post('/', async (req, res) => {
     try {
-      const { id } = req.params
+      const { description, imageurl } = req.body
 
-      const art = await pool.query("SELECT * FROM art WHERE id = $1",
-        [ id ]
+      const newImage = await pool.query("INSERT INTO arts (description, imageurl) VALUES($1, $2) RETURNING *",
+      [ description, imageurl ]
       )
-      res.status(200).json(art.rows)
+      console.log(newImage, 'new image from route')
+      res.status(200).json(newImage.rows)
     } catch (err) {
       console.error('ERROR IN GET ART: ', err.message)
     }
   })
 
   // UPDATE an art
-  router.put('/arts/:id', async (req, res) => {
+  router.put('/:id', async (req, res) => {
     try {
-      const { description } = req.body
+      const description = req.body.text;
       const { id } = req.params
 
       await pool.query("UPDATE art SET description = $1 WHERE id = $2",
@@ -47,8 +48,9 @@ router.get('/', async (req, res) => {
   })
 
   // DELETE an art
-  router.delete('/arts/:id', async (req, res) => {
+  router.delete('/:id', async (req, res) => {
     try {
+      console.log(req.params,'req params');
       const { id } = req.params
 
       await pool.query("DELETE FROM art WHERE id = $1",

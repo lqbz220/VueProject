@@ -2,10 +2,15 @@
 import SingleImage from './SingleImage.vue';
 import { useImageStore } from '../stores/imageStore.js';
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
 const imageStore = useImageStore();
 const { images } = storeToRefs(imageStore);
-console.log(images);
+const { getImages } = imageStore;
+
+onMounted(() => {
+  getImages();
+});
 </script>
 
 <template>

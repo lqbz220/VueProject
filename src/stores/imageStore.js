@@ -8,21 +8,16 @@ export const useImageStore = defineStore("imageStore", {
   actions: {
     async getImages() {
       try {
-        // this.images = [];
-        // console.log(this.images, 'this.images')
-        const { data: images } = await axios.get('/api/arts')
-        console.log(images, this.images, '=======');
-        this.images = images;
-        // for(const image of images){
-        //   this.images.push(image);
-        // }
+        const res = await axios.get('/api/arts')
+        this.images = await res.data;
+        console.log(this.images, 'storesssss')
       } catch(err){
         console.log(err);
       }
     },
     async deleteImage(id) {
       try {
-        await axios.delete(`api/arts/${id}`);
+        await axios.delete(`/api/arts/${id}`);
 
         this.images = this.images.filter((image) => {
           return image.id !== id;
@@ -31,7 +26,10 @@ export const useImageStore = defineStore("imageStore", {
         console.log(err);
       }
     },
-    editDescription(id, text) {
+   async editDescription(id, text) {
+    try {
+      await axios.put(`/api/arts/${id}`, { text });
+
       this.images = this.images.map((image) => {
         if (image.id === id) {
           image.description = text;
@@ -40,6 +38,9 @@ export const useImageStore = defineStore("imageStore", {
           return image;
         }
       });
+    } catch (err) {
+      console.log(err);
+    }
     },
   },
 });
