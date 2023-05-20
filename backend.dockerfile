@@ -2,7 +2,7 @@
 FROM node:14-alpine
 
 # Create an application directory
-# RUN mkdir -p /app
+RUN mkdir -p /app
 
 # The /app directory should act as the main application directory
 WORKDIR /app
@@ -10,9 +10,11 @@ WORKDIR /app
 # Copy or project directory (locally) in the current directory of our docker image (/app)
 COPY package*.json ./
 
-# Expose $PORT on container.
-# We use a varibale here as the port is something that can differ on the environment.
-EXPOSE $PORT
+# Install node packages
+RUN npm install
+
+# Copy or project directory (locally) in the current directory of our docker image (/app)
+COPY server/ .
 
 # Start the app
-CMD [ "java", "-jar", "./app.jar" ]
+CMD [ "npm", "start" ]
