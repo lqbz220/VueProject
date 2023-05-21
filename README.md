@@ -36,6 +36,7 @@ npm run lint
 
 Deploy
 https://www.baeldung.com/docker-local-images-minikube
+https://phoenixnap.com/kb/postgresql-kubernetes
 # minikube
 Start docker first
 # start minikube
@@ -61,3 +62,42 @@ kubectl apply -f backend-service.yaml
 # Helm Chart PSQL
 helm repo list
 helm install my-postgres bitnami/postgresql --set persistence.existingClaim=postgres--pv-pvc
+# Connect to postgreSQL client
+# Export the POSTGRES_PASSWORD environment variable to be able to log into the PostgreSQL instance
+export POSTGRES_PASSWORD=$(kubectl get secret --namespace default my-postgres-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode)
+# To see the password
+echo $POSTGRES_PASSWORD
+# Inspect secret's details
+kubectl describe secret my-postgres-postgresql --namespace default
+# port forwarding
+kubectl port-forward --namespace default svc/my-postgres-postgresql 5432:5432
+# if port is in use, identify what is running in port 5432
+lsof -i :5432
+# kill the processes
+kill -9 <pid>
+pkill postgres
+
+kubectl exec -it my-postgres-postgresql-0 -- psql -U lshi -d artporfolio
+
+# Download local database
+pg_dump -U lshi -d artporfolio -f dump.sql
+
+# Check what is in the app dir in docker container
+kubectl exec -it backend-deployment-78c7667566-tqzbl -- ls /app
+# Copy the dump file to the Minikube cluster (in server dir)
+kubectl cp dump.sql my-postgres-postgresql-0:/tmp/dump.sql
+
+psql -U postgres -d postgres -f /tmp/dump.sql
+
+# To push new image to minikube
+ minikube image load art-web-backend:new
+# after building the docker imamge, apply deployment with the new image name/tag
+
+# loadbalancer can be exposed via minikube tunnal
+minikube tunnel
+# Get external IP
+kubectl get svc
+# Access back end
+http://REPLACE_WITH_EXTERNAL_IP:8000
+http://127.0.0.1:8000
+

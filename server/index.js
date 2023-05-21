@@ -9,7 +9,7 @@ const PORT = 8000;
 // middleware
 app.use(cors())
 app.use(json())
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 // api routes
 app.use('/api', api);
 // app.get("/api/v1/hello", (_req, res) => {
