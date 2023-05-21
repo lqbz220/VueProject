@@ -11,13 +11,13 @@ WORKDIR /app
 # Copy the app package and package-lock.json file, and vite config file
 COPY package*.json ./
 COPY vite.config.js ./
+COPY index.html ./
 
 # Install node packages
 RUN npm install
 
 # Copy or project directory (locally) in the current directory of our docker image (/app)
 COPY src/ .
-COPY views/ .
 COPY public/ .
 
 # Build the app
@@ -40,6 +40,5 @@ RUN npm run build
 # ENV PROXY_LOGIN=$PROXY_LOGIN
 
 # Start the app
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev:client"]
 
-# docker build --file=frontend.dockerfile  -t art-web-frontend .

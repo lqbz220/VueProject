@@ -17,4 +17,8 @@ RUN npm install
 COPY server/ .
 
 # Start the app
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev:server"]
+
+
+
+
