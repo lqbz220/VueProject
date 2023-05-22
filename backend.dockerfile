@@ -10,7 +10,6 @@ WORKDIR /app
 
 # Copy or project directory (locally) in the current directory of our docker image (/app)
 COPY package*.json ./
-COPY index.html ./
 
 # Install node packages
 RUN npm install

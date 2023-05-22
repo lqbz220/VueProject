@@ -11,7 +11,6 @@ WORKDIR /app
 # Copy the app package and package-lock.json file, and vite config file
 COPY package*.json ./
 COPY vite.config.js ./
-COPY index.html ./
 
 # Install node packages
 RUN npm install
@@ -21,7 +20,7 @@ COPY src/ .
 COPY public/ .
 
 # Build the app
-RUN npm run build
+# RUN npm run build
 
 # Expose $PORT on container.
 # We use a varibale here as the port is something that can differ on the environment.
