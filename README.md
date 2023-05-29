@@ -102,3 +102,4 @@ kubectl get svc
 http://REPLACE_WITH_EXTERNAL_IP:8000(backend)
 http://127.0.0.1:8000
 
+# pg_hba.config is in /opt/homebrew/var/postgresql@12
