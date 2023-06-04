@@ -25,7 +25,7 @@ COPY public/ .
 
 # Expose $PORT on container.
 # We use a varibale here as the port is something that can differ on the environment.
-# EXPOSE $PORT
+EXPOSE 5173
 
 # Set host to localhost / the docker image
 # ENV NUXT_HOST=0.0.0.0

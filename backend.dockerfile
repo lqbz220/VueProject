@@ -17,6 +17,8 @@ RUN npm install
 # Copy or project directory (locally) in the current directory of our docker image (/app)
 COPY server /app/server/
 
+EXPOSE 8000
+
 # Start the app
 CMD [ "npm", "run", "dev:server"]
 

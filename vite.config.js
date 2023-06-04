@@ -19,5 +19,18 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./', import.meta.url))
     }
-  }
+  },
+  rollupOptions: {
+    // Specify the entry point of your application
+    input: 'src/main.js',
+
+    // Other Rollup options you may need...
+    // For example:
+    // external: ['lodash'],
+    // output: {
+    //   dir: 'dist',
+    //   format: 'es',
+    //   sourcemap: true
+    // }
+  },
 })
