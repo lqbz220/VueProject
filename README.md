@@ -95,8 +95,6 @@ https://phoenixnap.com/kb/postgresql-kubernetes
     http://REPLACE_WITH_EXTERNAL_IP:8000(backend)
     http://127.0.0.1:8000
 
-# pg_hba.config is in /opt/homebrew/var/postgresql@12
-
 # Connect to postgres pod via the backend pod shell
 1. Install posgtgres cli
     `apk add postgresql`
@@ -105,18 +103,20 @@ https://phoenixnap.com/kb/postgresql-kubernetes
 3. Enter the password for user postgres (password can be found in ConfigMap - secrete)
 
 # Other commands:
-## Check what is in the app dir in docker container
+### Check what is in the app dir in docker container
 kubectl exec -it backend-deployment-78c7667566-tqzbl -- ls /app
-## Export the POSTGRES_PASSWORD environment variable
+### Export the POSTGRES_PASSWORD environment variable
 export POSTGRES_PASSWORD=$(kubectl get secret --namespace default my-postgres-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode)
-## To see the password
+### To see the password
 echo $POSTGRES_PASSWORD
-## Inspect secret's details
+### Inspect secret's details
 kubectl describe secret my-postgres-postgresql --namespace default
-## Copy the dump file to the Minikube cluster
+### Copy the dump file to the Minikube cluster
 kubectl cp dump.sql my-postgres-postgresql-0:/tmp/dump.sql
-## Run the SQL script to execute the SQL statements and recreate the table in the PostgreSQL database
+### Run the SQL script to execute the SQL statements and recreate the table in the PostgreSQL database
 kubectl exec -it my-postgres-postgresql-0 -- psql -U postgres -d artporfolio -f /tmp/dump.sql -W
+
+Note: pg_hba.config is in /opt/homebrew/var/postgresql@12
 
 
 
