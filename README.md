@@ -52,10 +52,10 @@ https://phoenixnap.com/kb/postgresql-kubernetes
     `minikube image load art-web-backend:latest`
 4. Create deploment and service
     `kubectl apply -f postgres-pv-pvc.yaml`
-    `kubectl apply -f frontend-deployment.yaml`
-    `kubectl apply -f backend-deployment.yaml`
-    `kubectl apply -f frontend-service.yaml`
-    `kubectl apply -f backend-service.yaml`
+    kubectl apply -f frontend-deployment.yaml
+    kubectl apply -f backend-deployment.yaml
+    kubectl apply -f frontend-service.yaml
+    kubectl apply -f backend-service.yaml
 # Deploy Helm Chart PSQL
     `helm repo list`
     (need to apply pv-pvc before installing posgtres for persistent volume)

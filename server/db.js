@@ -6,7 +6,7 @@ const pool = new Pool({
   host: 'my-postgres-postgresql.default.svc.cluster.local',
   port: 5432,
   database: 'artporfolio',
-  password: 'FIkkexv5qX'
+  password: 'q8BAbPrtzy'
 })
 
 export default pool;
