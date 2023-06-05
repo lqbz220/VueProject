@@ -59,8 +59,23 @@ https://phoenixnap.com/kb/postgresql-kubernetes
 # Deploy Helm Chart PSQL
     `helm repo list`
     (need to apply pv-pvc before installing posgtres for persistent volume)
-    `helm install my-postgres bitnami/postgresql --set persistence.existingClaim=postgres-pv-pvc`
+    `helm install new-postgres bitnami/postgresql --set postgresqlUsername=psqluser,postgresqlPassword=psqlpassword --set existingSecret=psql-secret --set persistence.existingClaim=postgres-pv-pvc,existingSecretUsernameKey=username,existingSecretPasswordKey=password`
+
+    `helm install new-postgres bitnami/postgresql --set persistence.existingClaim=postgres-pv-pvc`
     If re-deploying the PSQL helm chart, pvc, pv, and secretes must be deleted first, because the configured password will be ignored on new installation in case when previous Posgresql release was deleted through the helm command. In that case, old PVC will have an old password, and setting it through helm won't take effect. Deleting persistent volumes (PVs) will solve the issue.
+
+# PostgreSQL can be accessed via port 5432 on the following DNS names from within your cluster:
+
+    `new-postgres-postgresql.default.svc.cluster.local` - Read/Write connection
+
+To get the password for "postgres" run:
+
+    `export POSTGRES_PASSWORD=$(kubectl get secret --namespace default new-postgres-postgresql -o jsonpath="{.data.postgres-password}" | base64 -d)`
+
+To connect to your database run the following command:
+
+    `kubectl run new-postgres-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:15.3.0-debian-11-r7 --env="PGPASSWORD=$POSTGRES_PASSWORD" \
+      --command -- psql --host new-postgres-postgresql -U postgres -d postgres -p 5432`
 # Uninstall helm chart
     `helm uninstall my-postgres`
 # Restore databse in postgress pod
@@ -117,6 +132,9 @@ https://phoenixnap.com/kb/postgresql-kubernetes
 
 Note: pg_hba.config is in `/opt/homebrew/var/postgresql@12`
 
-
+# Secret.yaml
+1. Create user name and password:
+    `echo -n psqluser | base64`
+    `echo -n psqlpassword | base64`
 
 
