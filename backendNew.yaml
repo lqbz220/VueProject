@@ -36,8 +36,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: psql-secret
-                  key: password
+                  name: my-postgres-postgresql
+                  key: pastgres-password
           ports:
             - containerPort: 8080
 ---

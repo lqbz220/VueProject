@@ -15,7 +15,7 @@ const toggleAdmin = () => {
     <routerLink v-if=!appStore.isAdmin to="/pencils">Pencil Sketches</routerLink>
     <routerLink v-if=!appStore.isAdmin to="/about">About</routerLink>
     <routerLink v-if=appStore.isAdmin @click="toggleAdmin()" to="/">Home</routerLink>
-    <routerLink v-if=!appStore.isAdmin to="/about">About</routerLink>
+    <!-- <routerLink v-if=!appStore.isAdmin to="/about">About</routerLink> -->
     <div>
       <v-btn v-if=!appStore.isAdmin @click="toggleAdmin()">Admin</v-btn>
     </div>
