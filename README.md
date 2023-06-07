@@ -123,5 +123,6 @@ TO DO:
 2. Create a configMap file for db host,
 3. Create a make file to run the command easier
 
+It is ok to use port forward for local deployment(it point a port from the local machine to the pod port).Otherwise, need to use loadbalancer(ingress) to direct the outside traffic to the cluster.
 
 
