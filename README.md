@@ -118,7 +118,7 @@ https://phoenixnap.com/kb/postgresql-kubernetes
 Note: pg_hba.config is in `/opt/homebrew/var/postgresql@12`
 
 TO DO:
-1. Create a secret yaml file for username, and mount as environment variable in the backen deployment, mount the password from the helm deployment config map
+1. Create a secret yaml file for username, and mount as environment variable in the backen deployment, mount the password from the helm deployment config map (helm chart creates its own password)
     - reference the username and passward using the environment variable (shell to the backend pod to find them `env`)
 2. Create a configMap file for db host, and host name? (example: host: 'new-postgres-postgresql.default.svc.cluster.local')
 3. Create a make file to run the command easier
