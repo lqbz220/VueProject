@@ -17,12 +17,12 @@ spec:
         - name: frontend-new
           image: art-web-frontend:latest
           imagePullPolicy: Never
-          env: # Setting Environmental Variables
-          - name: SERVER_URI # Setting Backend URI from configMap
-             valueFrom:
-               configMapKeyRef:
-                 name: backend-new-config # Name of configMap
-                 key: server-uri
+          # env: # Setting Environmental Variables
+          # - name: SERVER_URI # Setting Backend URI from configMap
+          #    valueFrom:
+          #      configMapKeyRef:
+          #        name: backend-new-config # Name of configMap
+          #        key: server-uri
           ports:
             - containerPort: 3000
 ---

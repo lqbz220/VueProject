@@ -36,8 +36,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: my-postgres-postgresql
-                  key: pastgres-password
+                  name: my-postgres-postgresql #name of the secret in Lens
+                  key: postgres-password #in Lens secret
           ports:
             - containerPort: 8080
 ---
