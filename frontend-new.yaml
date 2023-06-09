@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend-new
-          image: art-web-frontend:latest
+          image: art-web-frontend:new
           imagePullPolicy: Never
           # env: # Setting Environmental Variables
           # - name: SERVER_URI # Setting Backend URI from configMap

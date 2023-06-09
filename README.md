@@ -42,20 +42,18 @@ https://phoenixnap.com/kb/postgresql-kubernetes
 1. List available images
     `minikube image ls --format table`
 2. Build docker images:
-    `docker build --file=frontend.dockerfile  -t art-web-frontend:latest .`
-    `docker build --file=backend.dockerfile  -t art-web-backend:latest .`
+    `docker build --file=frontend.dockerfile  -t art-web-frontend:new .`
+    `docker build --file=backend.dockerfile  -t art-web-backend:new .`
 3. Remove old image and load new image to minikube
-    `minikube image rm art-web-frontend:latest`
-    `minikube image load art-web-frontend:latest`
+    `minikube image rm art-web-frontend:new`
+    `minikube image load art-web-frontend:new`
 
-    `minikube image rm art-web-backend:latest`
-    `minikube image load art-web-backend:latest`
+    `minikube image rm art-web-backend:new`
+    `minikube image load art-web-backend:new`
 4. Create deploment and service
     `kubectl apply -f postgres-pv-pvc.yaml`
-    `kubectl apply -f frontend-deployment.yaml`
-    `kubectl apply -f backend-deployment.yaml`
-    `kubectl apply -f frontend-service.yaml`
-    `kubectl apply -f backend-service.yaml`
+    `kubectl apply -f frontend-new.yaml`
+    `kubectl apply -f backend-new.yaml`
 # Deploy Helm Chart PSQL
     `helm repo list`
     (need to apply pv-pvc before installing posgtres for persistent volume)
@@ -98,9 +96,9 @@ To connect to your database run the following command:
 3. Forward database port:
     `kubectl port-forward --namespace default svc/my-postgres-postgresql 55432:5432`
 4. Forward frontend port:
-    `kubectl port-forward --namespace default svc/frontend-service 5173:80`
+    `kubectl port-forward --namespace default svc/frontend-new-service 5173:5173`
 5. Forward backend port:
-    `kubectl port-forward --namespace default svc/backend-service 8080:8000`
+    `kubectl port-forward --namespace default svc/backend-new-service 8080:8080`
 # Access the site:
 1. Loadbalancer can be exposed via minikube tunnal
     `minikube tunnel`
@@ -108,7 +106,7 @@ To connect to your database run the following command:
     `kubectl get svc`
 3. Open browser
     http://REPLACE_WITH_EXTERNAL_IP:8000(backend)
-    http://127.0.0.1:8000
+    http://127.0.0.1:8080
 
 # Connect to postgres pod via the backend pod shell
 1. Install posgtgres cli
@@ -132,6 +130,8 @@ To connect to your database run the following command:
 
 Note: pg_hba.config is in `/opt/homebrew/var/postgresql@12`
 
+Check if the pod is listening on a port
+ `netstat -tuln | grep 8080`
 # Secret.yaml
 1. Create user name and password:
     `echo -n psqluser | base64`

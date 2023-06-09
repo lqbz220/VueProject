@@ -1,13 +1,12 @@
-import 'dotenv/config';
 import pg from 'pg';
 const { Pool } = pg;
 
 const pool = new Pool({
-  user: import.meta.env.POSTGRES_USER,
-  host: import.meta.env.POSTGRES_HOST,
-  port: import.meta.env.MY_POSTGRES_POSTGRESQL_PORT_5432_TCP_PORT,
+  user: process.env.POSTGRES_USER,
+  host: process.env.POSTGRES_HOST,
+  port: process.env.MY_POSTGRES_POSTGRESQL_PORT_5432_TCP_PORT,
   database: 'artporfolio',
-  password: import.meta.env.POSTGRES_PASSWORD
+  password: process.env.POSTGRES_PASSWORD
 })
 
 export default pool;
