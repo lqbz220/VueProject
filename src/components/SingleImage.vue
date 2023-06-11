@@ -1,10 +1,12 @@
 <script setup>
 import { useAppStore } from "../stores/app-store.js";
+import { useImageStore } from "../stores/imageStore";
 import { defineProps, ref } from "vue";
 import ImageButtons from "./ImageButtons.vue";
 
 const appStore = useAppStore();
-
+const imageStore = useImageStore();
+console.log(imageStore.category, 'cat in single image');
 const props = defineProps({
   image: Object,
 });
@@ -21,7 +23,7 @@ const toggleFullScreen = (image) => {
 </script>
 
 <template>
-  <v-card>
+  <v-card v-if="image.category === imageStore.category">
     <v-img :src="image.imageurl" cover class="bg-grey-lighten-2 mt-6" :width="200"
       @click="toggleFullScreen(image)"></v-img>
     <v-card-title v-if="!appStore.isAdmin" class="text-h6">

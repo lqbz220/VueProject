@@ -2,22 +2,34 @@
 import SingleImage from './SingleImage.vue';
 import { useImageStore } from '../stores/imageStore.js';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const imageStore = useImageStore();
 const { images } = storeToRefs(imageStore);
+const { category } = storeToRefs(imageStore);
 const { getImages } = imageStore;
+const displayedImages = ref([]);
+
+const displayImages = async() => {
+  await getImages();
+  displayedImages.value = images.value.filter(image => image.category === imageStore.category);
+  return displayedImages;
+}
+
+watch(category, () => {
+  displayImages();
+  })
 
 onMounted(() => {
-  getImages();
+  displayImages();
 });
 </script>
 
 <template>
   <v-sheet class="bg-grey-lighten-3">
     <v-row>
-      <v-col v-for="image in images" :key="image.id" class="d-flex child-flex" cols="4">
-        <v-sheet class="pa-2 ma-2">
+      <v-col v-for="image in displayedImages" :key="image.id" class="d-flex child-flex" cols="displayedImages.length">
+        <v-sheet v-if="image.category===imageStore.category" class="pa-2 ma-2">
           <SingleImage :image="image" />
         </v-sheet>
         <template v-slot:placeholder>

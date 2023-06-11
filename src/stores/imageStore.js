@@ -4,13 +4,13 @@ import axios from 'axios';
 export const useImageStore = defineStore("imageStore", {
   state: () => ({
     images: [],
+    category: 'charcoal'
   }),
   actions: {
     async getImages() {
       try {
         const res = await axios.get('/api/arts')
         this.images = await res.data;
-        console.log(this.images, 'storesssss')
       } catch(err){
         console.log(err);
       }
